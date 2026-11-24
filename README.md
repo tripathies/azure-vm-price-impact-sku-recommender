@@ -4,6 +4,8 @@
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?logo=powershell&logoColor=white) ![Azure](https://img.shields.io/badge/Azure-Read--only%20assessment-0078D4?logo=microsoftazure&logoColor=white) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Azure VM price impact and SKU recommender — hero visual](docs/images/hero-banner.svg)
+
 ## Problem statement
 
 Azure customers need to identify which deployed VM SKUs may be exposed to the regional compute price adjustment effective **1 February 2027**, which VM generations and named series are excluded, the estimated monthly cost increase for each in-scope VM, and whether a lower-cost alternative SKU is available in the same Azure region.
@@ -56,6 +58,22 @@ The script does not resize, restart, stop, deploy, or otherwise modify Azure res
 7. Have the workload owner validate and approve any proposed change.
 
 The editable workflow diagram is in docs/price-impact-workflow.mmd.
+
+## Visual overview
+
+### End-to-end solution flow
+
+![Seven-step workflow from discovery through classification, price analysis, SKU recommendations and reporting](docs/images/solution-flow.svg)
+
+### Generation exclusion matrix
+
+![v1, v2 and named Intel v7 exclusions, including AMD v7 clarification](docs/images/generation-exclusions.svg)
+
+### Monthly cost model
+
+![Cost run-rate calculation model and inputs](docs/images/cost-impact-model.svg)
+
+All visuals are original SVG assets stored in `docs/images/` and can be reused in technical documentation or adapted for a LinkedIn post.
 
 ## Repository layout
 
