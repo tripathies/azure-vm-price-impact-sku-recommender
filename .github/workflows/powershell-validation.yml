@@ -1,0 +1,55 @@
+name: PowerShell validation
+
+on:
+  push:
+    paths:
+      - 'scripts/**/*.ps1'
+      - '.github/workflows/powershell-validation.yml'
+  pull_request:
+    paths:
+      - 'scripts/**/*.ps1'
+      - '.github/workflows/powershell-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $files = Get-ChildItem -Path ./scripts -Filter '*.ps1' -Recurse
+          if (-not $files) { throw 'No PowerShell scripts found under ./scripts.' }
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $file.FullName,
+              [ref]$tokens,
+              [ref]$errors
+            ) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_.ToString() }
+              throw "PowerShell parse failed: $($file.Name)"
+            }
+            Write-Host "Parsed: $($file.Name)"
+          }
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force -AllowClobber
+          $results = Invoke-ScriptAnalyzer -Path ./scripts -Recurse -Severity Error
+          if ($results) {
+            $results | Format-Table -AutoSize | Out-String | Write-Host
+            throw 'PSScriptAnalyzer reported errors.'
+          }
+          Write-Host 'PSScriptAnalyzer: no errors.'
