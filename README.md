@@ -103,7 +103,7 @@ Read docs/assumptions-and-limitations.md before using the output for a budget or
 
 - The percentage increases and exclusions are planning assumptions from customer-facing Service Health advisory details discussed for this project. Confirm the actual advisory and Impacted Resources list in your own tenant.
 - A VM not matching a named exclusion is classified as potentially affected, not confirmed affected.
-- The estimate is a full-month compute run-rate scenario (default 730 hours); it is not adjusted for VM power state, measured utilization or actual billed hours.
+- The estimate uses a full-month compute run-rate scenario (default 730 hours) for VMs not currently deallocated. A VM observed as deallocated at inventory time is not assigned a current compute rate; historical state and actual billed hours are not reconstructed.
 - The Retail Prices API returns public retail list-price information. It does not represent EA/MCA/CSP negotiated rates, reservations, savings plans, Azure Hybrid Benefit, Spot prices or your invoice.
 - The discount percentage is a manual what-if input.
 - Candidate screening uses regional SKU metadata and basic compute/storage capability checks. It is not proof of workload, OS/image, network, zone, quota, capacity or application compatibility.
