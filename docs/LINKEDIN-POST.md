@@ -30,3 +30,13 @@ Repository: https://github.com/tripathies/azure-vm-price-impact-sku-recommender
 What are you using today to identify price exposure and lower-cost VM size options across your Azure estate?
 
 #MicrosoftAzure #Azure #FinOps #CloudArchitecture #CloudCostOptimization #PowerShell #AzureVM #DevOps
+
+
+## Suggested visuals in this repository
+
+- Hero/banner: [docs/images/hero-banner.svg](images/hero-banner.svg)
+- Assessment flow: [docs/images/solution-flow.svg](images/solution-flow.svg)
+- Generation exclusions: [docs/images/generation-exclusions.svg](images/generation-exclusions.svg)
+- Monthly cost model: [docs/images/cost-impact-model.svg](images/cost-impact-model.svg)
+
+Use the workflow and exclusion visuals as separate carousel slides. The generated graphic pack is a visual aid; preserve the documented SKU exclusions and AMD v7 clarification when adapting it.
