@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+<title id="title">Azure VM price impact calculation model</title>
+<desc id="desc">Conceptual cost analysis using current retail meter rate, monthly hours, regional adjustment and optional discount, compared with same-region alternative VM SKU rates.</desc>
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#07192e"/><stop offset="1" stop-color="#0c2a4a"/></linearGradient>
+ <linearGradient id="card" x2="1" y2="1"><stop stop-color="#11446b"/><stop offset="1" stop-color="#102d4d"/></linearGradient>
+ <linearGradient id="accent" x2="1"><stop stop-color="#24c9ef"/><stop offset="1" stop-color="#3c8bff"/></linearGradient>
+</defs>
+<rect width="1600" height="700" rx="28" fill="url(#bg)"/>
+<text x="75" y="90" fill="#f4f8ff" font-family="Segoe UI,Arial" font-size="42" font-weight="700">Cost impact calculation model</text>
+<text x="77" y="132" fill="#a6c3dd" font-family="Segoe UI,Arial" font-size="22">A transparent monthly run-rate estimate — not an invoice forecast</text>
+<g font-family="Segoe UI,Arial">
+ <g transform="translate(70 205)">
+  <rect width="310" height="210" rx="20" fill="url(#card)" stroke="#35cafa" stroke-width="2"/>
+  <circle cx="46" cy="48" r="22" fill="#d8f7ff"/><text x="46" y="56" text-anchor="middle" fill="#095078" font-size="22" font-weight="800">1</text>
+  <text x="92" y="57" fill="#f4faff" font-size="25" font-weight="700">Current meter</text>
+  <text x="28" y="112" fill="#cbe9f9" font-size="21"><tspan x="28">Azure VM retail hourly rate</tspan><tspan x="28" dy="31">for region, size and OS</tspan></text>
+  <text x="28" y="184" fill="#72dcff" font-size="19" font-weight="700">Retain meter and SKU ID</text>
+ </g>
+ <path d="M389 310h52m-15-14 15 14-15 14" stroke="#53dfff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(455 205)">
+  <rect width="310" height="210" rx="20" fill="url(#card)" stroke="#35cafa" stroke-width="2"/>
+  <circle cx="46" cy="48" r="22" fill="#d8f7ff"/><text x="46" y="56" text-anchor="middle" fill="#095078" font-size="22" font-weight="800">2</text>
+  <text x="92" y="57" fill="#f4faff" font-size="25" font-weight="700">Monthly hours</text>
+  <text x="28" y="112" fill="#cbe9f9" font-size="21"><tspan x="28">Default run-rate assumption</tspan><tspan x="28" dy="31">730 hours per month</tspan></text>
+  <text x="28" y="184" fill="#72dcff" font-size="19" font-weight="700">Configurable input</text>
+ </g>
+ <path d="M774 310h52m-15-14 15 14-15 14" stroke="#53dfff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(840 205)">
+  <rect width="310" height="210" rx="20" fill="#4c3a15" stroke="#ffd16c" stroke-width="2"/>
+  <circle cx="46" cy="48" r="22" fill="#fff0c3"/><text x="46" y="56" text-anchor="middle" fill="#70480a" font-size="22" font-weight="800">3</text>
+  <text x="92" y="57" fill="#fff9e7" font-size="25" font-weight="700">Regional uplift</text>
+  <text x="28" y="112" fill="#fff0c8" font-size="21"><tspan x="28">Apply only to a VM</tspan><tspan x="28" dy="31">classified as potentially in scope</tspan></text>
+  <text x="28" y="184" fill="#ffdf96" font-size="19" font-weight="700">Check actual tenant notice</text>
+ </g>
+ <path d="M1159 310h52m-15-14 15 14-15 14" stroke="#53dfff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(1225 205)">
+  <rect width="310" height="210" rx="20" fill="#104a46" stroke="#45e1b7" stroke-width="2"/>
+  <circle cx="46" cy="48" r="22" fill="#d8fff4"/><text x="46" y="56" text-anchor="middle" fill="#0b6855" font-size="22" font-weight="800">4</text>
+  <text x="92" y="57" fill="#f2fffa" font-size="25" font-weight="700">Discount scenario</text>
+  <text x="28" y="112" fill="#d5fff4" font-size="21"><tspan x="28">Optional manual percentage</tspan><tspan x="28" dy="31">what-if calculation</tspan></text>
+  <text x="28" y="184" fill="#7df0ce" font-size="19" font-weight="700">Not an entitlement lookup</text>
+ </g>
+</g>
+<rect x="70" y="475" width="1465" height="120" rx="20" fill="#102f51" stroke="#7baed1" stroke-width="2"/>
+<text x="102" y="520" fill="#f5fbff" font-family="Segoe UI,Arial" font-size="24" font-weight="700">Projected monthly cost formula</text>
+<text x="102" y="565" fill="#6bdfff" font-family="Consolas,monospace" font-size="26">Hourly retail rate × monthly hours × (1 + regional uplift) × (1 − discount)</text>
+<text x="800" y="650" fill="#9dbbd3" font-family="Segoe UI,Arial" font-size="18" text-anchor="middle">Compare with lower-cost same-region candidates. Validate negotiated rates, reservations, OS licensing, capacity and workload fit separately.</text>
+</svg>
