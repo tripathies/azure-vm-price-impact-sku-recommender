@@ -1,42 +1,52 @@
-# LinkedIn announcement draft
+# LinkedIn launch post
 
-🚨 **Azure VM pricing update from 1 February 2027: do you know which workloads may cost more?**
+## Azure VM price impact: know what is exposed before the bill changes
 
-I built a read-only PowerShell Azure VM Price Impact & SKU Recommender to help cloud and FinOps teams answer three practical questions:
+A regional Azure compute price adjustment is planned to take effect on **1 February 2027**. One question cloud and FinOps teams should be able to answer before then:
 
-1. Which deployed standalone VMs may be in scope for the regional price adjustment?
-2. What could the revised monthly compute run rate look like, including a configurable discount scenario?
-3. Is there a lower-cost VM size in the same region that passes an initial capability and availability screen?
+**Which VMs may be in scope, what could the monthly impact look like, and are there lower-cost alternatives in the same region?**
 
-The tool inventories standalone Azure VMs, classifies regions and VM series against documented planning assumptions, checks named exclusion families, queries Azure Retail Prices, models the regional uplift, and compares lower-cost VM size candidates.
+I built the **Azure VM Price Impact & SKU Recommender** — a read-only PowerShell assessment utility designed to help answer those questions with an auditable workflow.
 
-It produces corporate-style HTML and auditable CSV reports:
+### What it does
 
-- VM cost impact detail
-- SKU recommendations
-- Alternative candidate audit
-- Run audit trail
-- Regional cost summary
-- JSON run manifest
+- Discovers standalone Azure VMs across enabled subscriptions visible to your signed-in identity.
+- Classifies deployed VM sizes against the project's regional planning assumptions and explicit generation exclusions.
+- Looks up public PAYG compute rates through the Azure Retail Prices API.
+- Models current and projected monthly compute run rate, with configurable monthly hours and an optional manual discount scenario.
+- Screens lower-cost VM SKU candidates in the **same Azure region**, using basic capability and regional availability metadata.
+- Exports per-VM cost detail, SKU recommendations, alternative-candidate audit, regional summary, run audit trail, JSON manifest and an HTML dashboard.
 
-One important distinction: a VM not matching a named exclusion is treated as **potentially affected**, not tenant-confirmed impact. Validate the actual Azure Service Health advisory, impacted resources, billing meter and contract before making a budget or architecture decision.
+### The exclusion logic matters
 
-The script is **read-only**. It recommends candidates; it does not resize or modify production VMs. Any proposed change still needs workload compatibility checks, approval, a maintenance plan and rollback.
+The project makes the named exclusions explicit:
 
-This is a first-pass assessment utility, not an invoice forecast. Retail list prices, 730 assumed monthly hours and manual discount inputs are modelling assumptions. It currently assesses standalone VM compute only; VM Scale Sets and non-compute charges are outside scope.
+- **v1:** Bv1, D, Ds, F, Fs, G, Gs, L, NP, HCS
+- **v2:** Av2, Amv2, Dv2, Dsv2, Fsv2, Lsv2
+- **Intel v7:** Dsv7, Ddsv7, Dlsv7, Dldsv7, Esv7, Edsv7
 
-Repository: https://github.com/tripathies/azure-vm-price-impact-sku-recommender
+**Important:** the v7 exclusions name six Intel series. **AMD v7 is not automatically excluded** just because it belongs to generation v7. The exact deployed SKU and the advisory in your own tenant must be checked.
 
-What are you using today to identify price exposure and lower-cost VM size options across your Azure estate?
+### Built for assessment, not blind automation
 
-#MicrosoftAzure #Azure #FinOps #CloudArchitecture #CloudCostOptimization #PowerShell #AzureVM #DevOps
+The script is read-only. It does not resize, stop, restart, deploy or modify VMs. A recommended SKU is a candidate for engineering review — not an automatic change instruction.
 
+A few boundaries are important:
+- A VM not matching a named exclusion is classified as **potentially affected**, not confirmed affected.
+- The model uses public retail pricing and a default 730-hour monthly run-rate assumption. It does not reproduce your invoice or negotiated EA/MCA/CSP rates, reservations, Savings Plans or Azure Hybrid Benefit.
+- Candidate screening is an initial filter, not proof of application, OS/image, performance, quota, zone or capacity compatibility.
+- The utility covers standalone VM compute; it does not model VM Scale Sets or other Azure service and infrastructure charges.
 
-## Suggested visuals in this repository
+The regional assumptions and exclusion matrix are based on customer-facing Service Health advisory details used for this project. This is a community-built assessment utility — **not a Microsoft product or an official Microsoft pricing announcement**. Always validate the actual advisory, impacted resources, meter IDs and contract terms in your tenant before making a budget or architecture decision.
 
-- Hero/banner: [docs/images/hero-banner.svg](images/hero-banner.svg)
-- Assessment flow: [docs/images/solution-flow.svg](images/solution-flow.svg)
-- Generation exclusions: [docs/images/generation-exclusions.svg](images/generation-exclusions.svg)
-- Monthly cost model: [docs/images/cost-impact-model.svg](images/cost-impact-model.svg)
+### Explore the project
 
-Use the workflow and exclusion visuals as separate carousel slides. The generated graphic pack is a visual aid; preserve the documented SKU exclusions and AMD v7 clarification when adapting it.
+🔗 GitHub repository: https://github.com/tripathies/azure-vm-price-impact-sku-recommender
+
+The repository includes the PowerShell script, assumptions and limitations, editable workflow source, visual diagrams, sample run guidance and GitHub Actions static validation.
+
+I’d value feedback from Azure architects, platform engineers and FinOps practitioners:
+
+**How are you identifying price exposure and evaluating right-sized, same-region VM alternatives across your Azure estate?**
+
+#MicrosoftAzure #Azure #FinOps #CloudCostOptimization #CloudArchitecture #PowerShell #AzureVM #CloudEngineering
