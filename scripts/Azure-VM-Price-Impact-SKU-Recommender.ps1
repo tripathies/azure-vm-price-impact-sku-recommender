@@ -65,7 +65,7 @@ function Get-VmSeries {
     $name = $VmSize -replace '^Standard_',''
     if ($name -match '^(?<family>[A-Za-z]+?)(?<size>\d+)(?<features>[a-z]*)_v(?<version>\d+)$') {
         $family = $Matches.family
-        if ($family.ToUpperInvariant() -in @('NP','HC')) { $family = $family.ToUpperInvariant() }
+        if ($family.ToUpperInvariant() -in @('NP','HC','HCS')) { $family = $family.ToUpperInvariant() }
         else { $family = $family.Substring(0,1).ToUpperInvariant() + $family.Substring(1).ToLowerInvariant() }
         return ($family + $Matches.features.ToLowerInvariant() + 'v' + $Matches.version)
     }
