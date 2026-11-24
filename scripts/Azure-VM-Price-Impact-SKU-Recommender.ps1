@@ -70,6 +70,7 @@ function Get-Impact {
         return [pscustomobject]@{ Status='Legacy v1/v2 - partner-reported scenario'; Uplift=$LegacyV1V2Percent; Basis='Optional partner-reported estimate; disabled by default' }
     }
     if (-not $regional) { return [pscustomobject]@{ Status='Outside listed regions'; Uplift=0; Basis='No regional planning uplift configured' } }
+    if ($Series -eq 'Unknown') { return [pscustomobject]@{ Status='Manual review required'; Uplift=$regional.Uplift; Basis='VM size family could not be normalized; verify exact SKU and tenant billing meter' } }
     if ($ManualReviewSeries -contains $Series) { return [pscustomobject]@{ Status='Manual review required'; Uplift=$regional.Uplift; Basis='Verify exact VM series and tenant billing meter' } }
     if ($ExcludedSeries -contains $Series) { return [pscustomobject]@{ Status='Named exclusion'; Uplift=0; Basis='Listed exclusion family; validate exact tenant meter' } }
     if ($RetailApiAlreadyIncludesIncrease) { return [pscustomobject]@{ Status='Potentially affected - API assumed updated'; Uplift=0; Basis='No additional uplift applied to avoid double counting' } }
@@ -180,16 +181,20 @@ foreach ($sub in $subscriptions) {
         $storageTypes = @($vm.StorageProfile.OsDisk.ManagedDisk.StorageAccountType) + @($vm.StorageProfile.DataDisks | ForEach-Object { $_.ManagedDisk.StorageAccountType })
         $needsPremiumIO = [bool](@($storageTypes | Where-Object { $_ -match '^(Premium|Ultra)' }).Count)
         try {
-            $rates = Get-RetailRates -Region $region -Currency $CurrencyCode
-            $currentRate = Get-Rate -Rates $rates -VmSize $size -OsType $osType
-            if ($currentRate) {
-                $currentGross=[math]::Round(([double]$currentRate.retailPrice*$MonthlyHours),2)
-                $futureGross=[math]::Round(($currentGross*(1+($impact.Uplift/100))),2)
-                $currentNet=[math]::Round(($currentGross*(1-($DiscountPercent/100))),2)
-                $futureNet=[math]::Round(($futureGross*(1-($DiscountPercent/100))),2)
-                $delta=[math]::Round(($futureNet-$currentNet),2)
+            if ($power -match '(?i)deallocated') {
+                Add-Audit -Stage 'Retail price lookup' -Status 'Skipped - deallocated' -SubscriptionName $sub.Name -Region $region -Resource $vm.Name -Detail 'VM is deallocated at inventory time; no current compute run rate is assigned. Historical usage is not modelled.'
+            } else {
+                $rates = Get-RetailRates -Region $region -Currency $CurrencyCode
+                $currentRate = Get-Rate -Rates $rates -VmSize $size -OsType $osType
+                if ($currentRate) {
+                    $currentGross=[math]::Round(([double]$currentRate.retailPrice*$MonthlyHours),2)
+                    $futureGross=[math]::Round(($currentGross*(1+($impact.Uplift/100))),2)
+                    $currentNet=[math]::Round(($currentGross*(1-($DiscountPercent/100))),2)
+                    $futureNet=[math]::Round(($futureGross*(1-($DiscountPercent/100))),2)
+                    $delta=[math]::Round(($futureNet-$currentNet),2)
+                }
+                Add-Audit -Stage 'Retail price lookup' -Status $(if ($currentRate) {'Completed'} else {'No exact match'}) -SubscriptionName $sub.Name -Region $region -Resource $vm.Name -Detail $(if ($currentRate) {"Meter=$($currentRate.meterId); SKU=$($currentRate.skuId); hourly=$($currentRate.retailPrice) $CurrencyCode"} else {"No exact OS-specific hourly meter for $size / $osType"})
             }
-            Add-Audit -Stage 'Retail price lookup' -Status $(if ($currentRate) {'Completed'} else {'No exact match'}) -SubscriptionName $sub.Name -Region $region -Resource $vm.Name -Detail $(if ($currentRate) {"Meter=$($currentRate.meterId); SKU=$($currentRate.skuId); hourly=$($currentRate.retailPrice) $CurrencyCode"} else {"No exact OS-specific hourly meter for $size / $osType"})
         } catch {
             Add-Audit -Stage 'Retail price lookup' -Status 'Failed' -SubscriptionName $sub.Name -Region $region -Resource $vm.Name -Detail $_.Exception.Message
         }
