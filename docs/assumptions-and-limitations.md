@@ -33,7 +33,7 @@ Do not infer a blanket exclusion for all v7 processors. AMD v7 is not included i
 - The script queries the Microsoft Azure Retail Prices API for Virtual Machines consumption rates by Azure region and requested currency.
 - It selects a matching OS-specific meter, prefers a primary meter-region result and uses the latest effective rate that has started.
 - The model applies the configured uplift to that retrieved rate unless the RetailApiAlreadyIncludesIncrease switch is supplied.
-- Default monthly run rate is 730 hours. This is a full-month scenario, not actual hours measured from Azure Monitor, VM power state or billing data.
+- Default monthly run rate is 730 hours for VMs not observed as deallocated at inventory time. A VM currently deallocated is not assigned a current compute run rate. The script is only a point-in-time inventory and does not reconstruct historical power state, utilization or actual billed hours.
 - The discount percentage is a user-entered what-if scenario, not a discovered contract entitlement.
 - The optional legacy v1/v2 25% scenario is partner-reported, disabled by default and separate from the listed regional uplift. Do not combine both uplifts for the same meter.
 - Retail API rate selection may not reproduce every customer billing meter. Validate returned meter ID, SKU ID and effective date against Cost Management and the applicable commercial agreement.
