@@ -1,0 +1,26 @@
+# Local environment and IDE
+.vscode/
+.idea/
+*.user
+*.suo
+
+# PowerShell transcripts and logs
+*.log
+*.transcript
+
+# Generated reports (may contain subscription, resource or billing data)
+Azure-VM-Price-Impact-*/
+01-VM-Cost-Impact-Detail-*.csv
+02-VM-SKU-Recommendations-*.csv
+03-Alternative-Candidate-Audit-*.csv
+04-Run-Audit-Trail-*.csv
+05-Regional-Cost-Summary-*.csv
+Azure-VM-Price-Impact-Dashboard-*.html
+Run-Manifest-*.json
+
+# Secrets / local settings
+.env
+.env.*
+*.pfx
+*.pem
+*.key
