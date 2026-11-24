@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+<title id="title">Azure VM price impact assessment workflow</title>
+<desc id="desc">Seven steps: discover, normalize, exclude and classify, retrieve rates, calculate impact, recommend alternatives, export reports.</desc>
+<defs>
+ <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#081a31"/><stop offset="1" stop-color="#0d2b4c"/></linearGradient>
+ <linearGradient id="a" x2="1" y2="1"><stop stop-color="#0f70b7"/><stop offset="1" stop-color="#103f6c"/></linearGradient>
+ <linearGradient id="b" x2="1" y2="1"><stop stop-color="#087d83"/><stop offset="1" stop-color="#104f68"/></linearGradient>
+ <linearGradient id="c" x2="1" y2="1"><stop stop-color="#6241b4"/><stop offset="1" stop-color="#302a6e"/></linearGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="8" result="s"/><feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1600" height="720" rx="28" fill="url(#bg)"/>
+<text x="70" y="92" fill="#f1f8ff" font-size="42" font-family="Segoe UI,Arial" font-weight="700">Assessment workflow</text>
+<text x="72" y="134" fill="#9fc5df" font-size="22" font-family="Segoe UI,Arial">A repeatable, read-only path from VM inventory to an evidence-backed review pack</text>
+<g font-family="Segoe UI,Arial">
+ <g transform="translate(55 225)">
+  <rect width="190" height="245" rx="22" fill="url(#a)" stroke="#42cfff" stroke-width="2" filter="url(#shadow)"/>
+  <circle cx="36" cy="38" r="21" fill="#d9f7ff"/><text x="36" y="46" fill="#06436f" text-anchor="middle" font-size="22" font-weight="700">1</text>
+  <text x="95" y="100" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">Discover</text>
+  <text x="95" y="140" text-anchor="middle" fill="#d6f0ff" font-size="18"><tspan x="95">Subscriptions</tspan><tspan x="95" dy="26">and standalone</tspan><tspan x="95" dy="26">VM inventory</tspan></text>
+ </g>
+ <path d="M250 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(285 225)">
+  <rect width="190" height="245" rx="22" fill="url(#b)" stroke="#49e5cf" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#d8fff7"/><text x="36" y="46" fill="#075450" text-anchor="middle" font-size="22" font-weight="700">2</text>
+  <text x="95" y="100" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">Normalize</text>
+  <text x="95" y="140" text-anchor="middle" fill="#d1fff7" font-size="18"><tspan x="95">Region ID,</tspan><tspan x="95" dy="26">VM size and</tspan><tspan x="95" dy="26">generation</tspan></text>
+ </g>
+ <path d="M480 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(515 225)">
+  <rect width="190" height="245" rx="22" fill="url(#c)" stroke="#b99cff" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#f0e8ff"/><text x="36" y="46" fill="#482a91" text-anchor="middle" font-size="22" font-weight="700">3</text>
+  <text x="95" y="100" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">Classify</text>
+  <text x="95" y="140" text-anchor="middle" fill="#ece4ff" font-size="18"><tspan x="95">Apply v1, v2</tspan><tspan x="95" dy="26">and Intel v7</tspan><tspan x="95" dy="26">exclusions</tspan></text>
+ </g>
+ <path d="M710 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(745 225)">
+  <rect width="190" height="245" rx="22" fill="url(#a)" stroke="#42cfff" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#d9f7ff"/><text x="36" y="46" fill="#06436f" text-anchor="middle" font-size="22" font-weight="700">4</text>
+  <text x="95" y="100" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">Get rates</text>
+  <text x="95" y="140" text-anchor="middle" fill="#d6f0ff" font-size="18"><tspan x="95">Retail PAYG</tspan><tspan x="95" dy="26">meter and SKU</tspan><tspan x="95" dy="26">evidence</tspan></text>
+ </g>
+ <path d="M940 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(975 225)">
+  <rect width="190" height="245" rx="22" fill="url(#b)" stroke="#49e5cf" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#d8fff7"/><text x="36" y="46" fill="#075450" text-anchor="middle" font-size="22" font-weight="700">5</text>
+  <text x="95" y="100" text-anchor="middle" fill="#fff" font-size="25" font-weight="700">Calculate</text>
+  <text x="95" y="140" text-anchor="middle" fill="#d1fff7" font-size="18"><tspan x="95">Monthly impact</tspan><tspan x="95" dy="26">and discount</tspan><tspan x="95" dy="26">scenario</tspan></text>
+ </g>
+ <path d="M1170 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(1205 225)">
+  <rect width="170" height="245" rx="22" fill="url(#c)" stroke="#b99cff" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#f0e8ff"/><text x="36" y="46" fill="#482a91" text-anchor="middle" font-size="22" font-weight="700">6</text>
+  <text x="85" y="100" text-anchor="middle" fill="#fff" font-size="24" font-weight="700">Recommend</text>
+  <text x="85" y="140" text-anchor="middle" fill="#ece4ff" font-size="18"><tspan x="85">Lower-cost,</tspan><tspan x="85" dy="26">same-region</tspan><tspan x="85" dy="26">SKU candidates</tspan></text>
+ </g>
+ <path d="M1380 350h30m-12-12 12 12-12 12" fill="none" stroke="#4bd8fb" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ <g transform="translate(1415 225)">
+  <rect width="145" height="245" rx="22" fill="#1d3558" stroke="#f3c35c" stroke-width="2"/>
+  <circle cx="36" cy="38" r="21" fill="#fff3ce"/><text x="36" y="46" fill="#7b5108" text-anchor="middle" font-size="22" font-weight="700">7</text>
+  <text x="72" y="100" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">Export</text>
+  <text x="72" y="140" text-anchor="middle" fill="#fff0cd" font-size="17"><tspan x="72">CSV, HTML</tspan><tspan x="72" dy="26">and audit</tspan><tspan x="72" dy="26">manifest</tspan></text>
+ </g>
+</g>
+<rect x="70" y="535" width="1460" height="105" rx="18" fill="#0b233d" stroke="#f2bd4f" stroke-width="2"/>
+<text x="100" y="578" fill="#ffd975" font-family="Segoe UI,Arial" font-size="21" font-weight="700">HUMAN APPROVAL GATE</text>
+<text x="100" y="612" fill="#e4eef9" font-family="Segoe UI,Arial" font-size="19">Validate the tenant advisory, billing meter, candidate capacity and workload compatibility before any resize or production change.</text>
+<text x="800" y="680" fill="#88abc6" font-family="Segoe UI,Arial" font-size="16" text-anchor="middle">Read-only assessment — recommendations are review candidates, not automatic resize instructions</text>
+</svg>
