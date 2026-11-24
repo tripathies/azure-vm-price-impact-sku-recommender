@@ -4,6 +4,24 @@
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?logo=powershell&logoColor=white) ![Azure](https://img.shields.io/badge/Azure-Read--only%20assessment-0078D4?logo=microsoftazure&logoColor=white) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## Problem statement
+
+Azure customers need to identify which deployed VM SKUs may be exposed to the regional compute price adjustment effective **1 February 2027**, which VM generations and named series are excluded, the estimated monthly cost increase for each in-scope VM, and whether a lower-cost alternative SKU is available in the same Azure region.
+
+The tool must make the exclusions explicit and auditable. It must **not** treat all v7 VM sizes as excluded: the v7 exclusions name six Intel series only. AMD v7 is not automatically excluded.
+
+### Generation-based excluded VM series
+
+| Generation | Excluded VM series |
+|---|---|
+| v1 | Bv1, D, Ds, F, Fs, G, Gs, L, NP, HCS |
+| v2 | Av2, Amv2, Dv2, Dsv2, Fsv2, Lsv2 |
+| v7 (Intel only) | Dsv7, Ddsv7, Dlsv7, Dldsv7, Esv7, Edsv7 |
+
+**Important:** AMD v7 is not automatically excluded. The exclusion specifically names six Intel v7 series. Do not classify an AMD v7 SKU as excluded merely because it is v7. Confirm the exact deployed SKU and tenant Service Health advisory before relying on the classification.
+
+The v1 family labels above are generation shorthand; the script normalizes deployed size names into series identifiers (for example, `Standard_D4s_v1` becomes `Dsv1`). The explicit exclusion arrays in the script include the corresponding v1 series variants and HCS v1.
+
 ## What this project does
 
 The script inventories standalone Azure virtual machines in enabled subscriptions visible to the signed-in identity. It classifies VM sizes against the documented regional planning assumptions, retrieves Azure Retail Prices API consumption rates, estimates current and projected monthly compute run rate, and searches for lower-cost candidate VM sizes in the same region.
