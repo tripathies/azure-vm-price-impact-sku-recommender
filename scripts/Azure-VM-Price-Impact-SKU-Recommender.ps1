@@ -5,6 +5,7 @@
   Inventories standalone VMs, estimates full-month PAYG compute run rate using explicit
   regional planning assumptions, and ranks cheaper same-region SKU candidates for review.
 .REQUIREMENTS
+  Static checks: GitHub Actions PowerShell parser and PSScriptAnalyzer.
   PowerShell 7+, Az.Accounts, Az.Compute, and HTTPS access to the Azure Retail Prices API.
 #>
 [CmdletBinding()]
