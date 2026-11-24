@@ -1,0 +1,10 @@
+flowchart TD
+    A[Azure VM pricing update<br/>1 February 2027] --> B[Discover subscriptions, VMs and VMSS]
+    B --> C[Classify region and exact SKU series]
+    C --> D[Calculate current and projected compute cost]
+    D --> E[Apply optional discount scenario]
+    E --> F[Compare same-region available VM sizes]
+    F --> G[Rank lower-cost candidates and retain evidence]
+    G --> H[Export CSVs, HTML dashboard and audit trail]
+    H --> I[Review with workload owner and approve]
+    I --> J[Implement separately and verify]
