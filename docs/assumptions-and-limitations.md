@@ -16,17 +16,19 @@ The script uses the following planning inputs, based on customer-facing Azure Se
 
 The city/hub labels are descriptive references only. The script uses Azure region IDs for inventory and price lookups. Confirm the actual advisory, dates, affected meters and impacted resources in the relevant tenant before using these figures.
 
-## VM classification
+## Problem statement and generation exclusions
 
-The script treats non-excluded VM series in the seven listed regions as potentially affected. It does not claim that every non-excluded VM has a confirmed increase.
+Identify VMs potentially exposed to the regional compute price adjustment effective 1 February 2027, apply the exact generation/SKU exclusions below, estimate monthly impact, and recommend lower-cost same-region alternatives for review.
 
-The static exclusions discussed for the regional advisory include:
+| Generation | Excluded VM series |
+|---|---|
+| v1 | Bv1, D, Ds, F, Fs, G, Gs, L, NP, HCS |
+| v2 | Av2, Amv2, Dv2, Dsv2, Fsv2, Lsv2 |
+| v7 (Intel only) | Dsv7, Ddsv7, Dlsv7, Dldsv7, Esv7, Edsv7 |
 
-- Legacy v1 examples: Bv1, Dv1, Fv1, Gv1, NPv1 and their identified size-feature variants. L/Ls and HC/HCS names are flagged for manual review because exact series and meter naming needs tenant verification.
-- v2: Av2, Amv2, Dv2, Dsv2, Fsv2 and Lsv2.
-- Six named Intel v7 series: Dsv7, Ddsv7, Dlsv7, Dldsv7, Esv7 and Edsv7.
+**AMD v7 is not automatically excluded.** Only the six named Intel v7 series are excluded. The script normalizes deployed SKU names into series identifiers, including v1 variants such as Dv1/Dsv1 and HCSv1. It uses explicit exclusion arrays for v1, v2 and Intel v7.
 
-Do not infer a blanket exclusion for all v7 processors. AMD v7 is not included in the six named Intel v7 exclusions. The tenant advisory and exact billing meter take precedence over this static list. The script's classification table is a planning aid and should be reviewed against SKU inventory and billing meter IDs.
+The script treats other series in the listed regions as potentially affected, not tenant-confirmed affected. Always verify the exact resource and billing meter against the actual tenant Service Health advisory.
 
 ## Price model
 
