@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+<title id="title">Generation excluded Azure VM series</title>
+<desc id="desc">The v1, v2, and six Intel v7 excluded VM series, with explicit warning that AMD v7 is not automatically excluded.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#07182e"/><stop offset="1" stop-color="#102d50"/></linearGradient>
+ <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#0e6cb3"/><stop offset="1" stop-color="#143d69"/></linearGradient>
+ <linearGradient id="violet" x2="1" y2="1"><stop stop-color="#7050c8"/><stop offset="1" stop-color="#302d75"/></linearGradient>
+ <linearGradient id="amber" x2="1" y2="1"><stop stop-color="#8b5c13"/><stop offset="1" stop-color="#47330e"/></linearGradient>
+</defs>
+<rect width="1600" height="850" rx="30" fill="url(#bg)"/>
+<text x="72" y="94" fill="#f5f9ff" font-family="Segoe UI,Arial" font-size="44" font-weight="700">Generation-based VM exclusions</text>
+<text x="75" y="137" fill="#a8c6de" font-family="Segoe UI,Arial" font-size="22">Use these exact families as the assessment starting point; verify actual SKU and meter in the tenant.</text>
+<g font-family="Segoe UI,Arial">
+ <g transform="translate(70 190)">
+  <rect width="460" height="345" rx="22" fill="url(#blue)" stroke="#43caff" stroke-width="2"/>
+  <rect x="26" y="25" width="100" height="54" rx="13" fill="#e1f7ff"/><text x="76" y="62" text-anchor="middle" fill="#06436d" font-size="29" font-weight="800">v1</text>
+  <text x="153" y="61" fill="#fff" font-size="27" font-weight="700">Legacy generation</text>
+  <text x="33" y="137" fill="#e8f6ff" font-size="24" font-weight="700">Excluded series</text>
+  <text x="35" y="190" fill="#fff" font-size="29">Bv1, D, Ds, F, Fs, G, Gs,</text>
+  <text x="35" y="235" fill="#fff" font-size="29">L, NP, HCS</text>
+  <line x1="34" y1="270" x2="426" y2="270" stroke="#7cc9ee" opacity=".6"/>
+  <text x="35" y="308" fill="#c9eaff" font-size="18">Check normalized v1 SKU suffixes.</text>
+ </g>
+ <g transform="translate(570 190)">
+  <rect width="460" height="345" rx="22" fill="#0b5b66" stroke="#46e4d2" stroke-width="2"/>
+  <rect x="26" y="25" width="100" height="54" rx="13" fill="#dcfff8"/><text x="76" y="62" text-anchor="middle" fill="#075657" font-size="29" font-weight="800">v2</text>
+  <text x="153" y="61" fill="#fff" font-size="27" font-weight="700">Second generation</text>
+  <text x="33" y="137" fill="#e8fffb" font-size="24" font-weight="700">Excluded series</text>
+  <text x="35" y="190" fill="#fff" font-size="27">Av2, Amv2, Dv2, Dsv2,</text>
+  <text x="35" y="235" fill="#fff" font-size="27">Fsv2, Lsv2</text>
+  <line x1="34" y1="270" x2="426" y2="270" stroke="#76e6d8" opacity=".6"/>
+  <text x="35" y="308" fill="#c8fff6" font-size="18">Match complete SKU family names.</text>
+ </g>
+ <g transform="translate(1070 190)">
+  <rect width="460" height="345" rx="22" fill="url(#violet)" stroke="#b9a4ff" stroke-width="2"/>
+  <rect x="26" y="25" width="100" height="54" rx="13" fill="#eee7ff"/><text x="76" y="62" text-anchor="middle" fill="#4a3296" font-size="29" font-weight="800">v7</text>
+  <text x="153" y="61" fill="#fff" font-size="25" font-weight="700">Intel only — six series</text>
+  <text x="33" y="137" fill="#f3edff" font-size="24" font-weight="700">Excluded series</text>
+  <text x="35" y="183" fill="#fff" font-size="24">Dsv7, Ddsv7, Dlsv7,</text>
+  <text x="35" y="225" fill="#fff" font-size="24">Dldsv7, Esv7, Edsv7</text>
+  <line x1="34" y1="270" x2="426" y2="270" stroke="#d0c2ff" opacity=".6"/>
+  <text x="35" y="308" fill="#e5ddff" font-size="18">Do not exclude all v7 by default.</text>
+ </g>
+</g>
+<rect x="70" y="585" width="1460" height="170" rx="22" fill="url(#amber)" stroke="#ffd45e" stroke-width="3"/>
+<circle cx="132" cy="670" r="31" fill="#ffdc78"/><text x="132" y="682" fill="#603a00" font-family="Segoe UI,Arial" font-size="36" font-weight="800" text-anchor="middle">!</text>
+<text x="195" y="643" fill="#ffe59c" font-family="Segoe UI,Arial" font-size="28" font-weight="800">IMPORTANT — AMD v7 is not automatically excluded</text>
+<text x="195" y="692" fill="#fff6db" font-family="Segoe UI,Arial" font-size="24">The exclusion specifically names six Intel v7 series above. Do not mark AMD v7 as excluded solely because its generation is v7.</text>
+<text x="800" y="810" fill="#8fadc6" font-family="Segoe UI,Arial" font-size="17" text-anchor="middle">Classification reference only — the tenant Service Health advisory and exact billing meter take precedence.</text>
+</svg>
