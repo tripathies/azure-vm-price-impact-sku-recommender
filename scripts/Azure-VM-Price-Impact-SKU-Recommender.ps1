@@ -26,6 +26,10 @@ $GeneratedUtc = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
 $EffectiveDate = [datetime]'2027-02-01'
 $RetailApiBase = 'https://prices.azure.com/api/retail/prices'
 
+# Problem statement: identify VMs in the listed regions that may receive the 1-Feb-2027
+# compute price increase, exclude only the named generation/SKU families below, estimate
+# monthly impact, and recommend lower-cost same-region alternatives for human review.
+# AMD v7 is NOT automatically excluded: only six explicitly named Intel v7 series are excluded.
 # Planning assumptions. Confirm the actual Service Health advisory and impacted resources in each tenant.
 $RegionalPricing = @{
     northeurope   = @{ Uplift = 17; Area = 'Dublin, Ireland' }
@@ -36,9 +40,14 @@ $RegionalPricing = @{
     norwaywest    = @{ Uplift = 9;  Area = 'Stavanger hub, Norway' }
     southeastasia = @{ Uplift = 8;  Area = 'Singapore' }
 }
-$ExcludedSeries = @('Bv1','Bsv1','Dv1','Dsv1','Fv1','Fsv1','Gv1','Gsv1','NPv1','NPsv1','Av2','Amv2','Dv2','Dsv2','Fsv2','Lsv2','Dsv7','Ddsv7','Dlsv7','Dldsv7','Esv7','Edsv7')
-$LegacyV1V2Series = @('Bv1','Bsv1','Dv1','Dsv1','Fv1','Fsv1','Gv1','Gsv1','Lv1','Lsv1','NPv1','NPsv1','Av2','Amv2','Dv2','Dsv2','Fsv2','Lsv2')
-$ManualReviewSeries = @('Lv1','Lsv1','HCv1','HCsv1','HCSv1')
+# Explicit generation-based exclusions from the problem statement. The series strings are
+# normalized by Get-VmSeries (e.g. Standard_D4s_v1 -> Dsv1).
+$ExcludedV1Series = @('Bv1','Bsv1','Dv1','Dsv1','Fv1','Fsv1','Gv1','Gsv1','Lv1','Lsv1','NPv1','NPsv1','HCSv1')
+$ExcludedV2Series = @('Av2','Amv2','Dv2','Dsv2','Fsv2','Lsv2')
+$ExcludedIntelV7Series = @('Dsv7','Ddsv7','Dlsv7','Dldsv7','Esv7','Edsv7')
+$ExcludedSeries = @($ExcludedV1Series + $ExcludedV2Series + $ExcludedIntelV7Series)
+$LegacyV1V2Series = @($ExcludedV1Series + $ExcludedV2Series)
+$ManualReviewSeries = @()
 $Audit = [System.Collections.Generic.List[object]]::new()
 $Inventory = [System.Collections.Generic.List[object]]::new()
 $Recommendations = [System.Collections.Generic.List[object]]::new()
